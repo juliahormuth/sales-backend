@@ -1,21 +1,26 @@
 package com.github.juliahormuth.domain.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.github.juliahormuth.domain.entity.Client;
 
-@Repository
-public class ClientRepository {
+public interface ClientRepository extends JpaRepository<Client, Integer> {
 
-    private static String INSERT = "INSERT INTO CLIENT (NAME) VALUES (?)";
+    // Query Methods
+    // List<Client> findByNameLike(String name);
 
-    @Autowired
-    private JdbcTemplate template;
+    @Query(value = "select  * from Client c where c.name like '%:name' ", nativeQuery = true)
+    List<Client> findByName(@Param("name") String name);
 
-    public Client save(Client client) {
-        this.template.update(INSERT, new Object[] { client.getName() });
-        return client;
-    }
+    @Query("delete from Client c where c.name =:name ")
+    @Modifying
+    void DeleteByName(String name);
+
+    boolean existsByName(String name);
+
 }

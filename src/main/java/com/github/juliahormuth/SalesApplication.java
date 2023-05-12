@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.github.juliahormuth.domain.entity.Client;
 import com.github.juliahormuth.domain.repository.ClientRepository;
+import java.util.List;
 
 @SpringBootApplication
 public class SalesApplication {
@@ -15,9 +16,12 @@ public class SalesApplication {
     @Bean
     public CommandLineRunner init(@Autowired ClientRepository clientRepository) {
         return args -> {
-            Client client = new Client();
-            client.setName("Julia");
-            clientRepository.save(client);
+            System.out.println("Salvando clientes");
+            clientRepository.save(new Client("Fulano"));
+            clientRepository.save(new Client("Outro Cliente"));
+
+            List<Client> result = clientRepository.findByName("Julia");
+            result.forEach(System.out::println);
         };
     }
 
