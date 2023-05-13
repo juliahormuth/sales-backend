@@ -1,10 +1,13 @@
 package com.github.juliahormuth.domain.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,9 @@ public class Client {
 
     @Column(name = "name", length = 100)
     private String name;
+
+    @OneToMany(mappedBy = "client")
+    private Set<Request> requests;
 
     public Client() {
     }
@@ -40,6 +46,14 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(Set<Request> requests) {
+        this.requests = requests;
     }
 
 }
