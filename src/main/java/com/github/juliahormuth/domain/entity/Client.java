@@ -2,13 +2,7 @@ package com.github.juliahormuth.domain.entity;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "client")
@@ -22,8 +16,8 @@ public class Client {
     @Column(name = "name", length = 100)
     private String name;
 
-    @OneToMany(mappedBy = "client")
-    private Set<Request> requests;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<Request> request;
 
     public Client() {
     }
@@ -49,11 +43,11 @@ public class Client {
     }
 
     public Set<Request> getRequests() {
-        return requests;
+        return request;
     }
 
     public void setRequests(Set<Request> requests) {
-        this.requests = requests;
+        this.request = requests;
     }
 
 }
