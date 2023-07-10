@@ -1,5 +1,7 @@
 package com.github.juliahormuth.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Set;
 
 import javax.persistence.*;
@@ -16,6 +18,7 @@ public class Client {
     @Column(name = "name", length = 100)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<Request> request;
 
