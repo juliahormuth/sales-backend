@@ -29,7 +29,7 @@ public class Request {
     @Column(name = "date_request")
     private LocalDate dateRequest;
 
-    @Column(name = "total", length = 20, precision = 2)
+    @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
 
     @OneToMany(mappedBy = "request")
@@ -75,4 +75,11 @@ public class Request {
         this.items = items;
     }
 
+    @Override
+    public String toString() {
+        return "Request{" +
+                "id=" + id +
+                "total" + total +
+                '}';
+    }
 }
