@@ -18,6 +18,9 @@ public class Client {
     @Column(name = "name", length = 100)
     private String name;
 
+    @Column(name = "document", length = 11)
+    private String document;
+
     @JsonIgnore
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<Request> request;
@@ -53,4 +56,19 @@ public class Client {
         this.request = requests;
     }
 
+    public Set<Request> getRequest() {
+        return request;
+    }
+
+    public void setRequest(Set<Request> request) {
+        this.request = request;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
 }

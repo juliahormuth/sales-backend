@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 public class SalesApplication {
 
 
-    @Bean
+   /* @Bean
     public CommandLineRunner commandLineRunner(@Autowired ClientRepository clientRepository) {
 
         return args -> {
@@ -20,6 +20,7 @@ public class SalesApplication {
             clientRepository.save(c);
         };
     }
+    */
     public static void main(String[] args) {
         SpringApplication.run(SalesApplication.class, args);
     }
